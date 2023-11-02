@@ -11,7 +11,7 @@ In diesem Code wird der Access-Control-Allow-Origin-Header auf * gesetzt, was be
 dieser Endpunkt-Route anfordern und lesen kann. Das ist ein Sicherheitsrisiko, insbesondere wenn die Route sensible
 Informationen liefert, da bösartige Websites diese Daten bei ihren Benutzern abfragen und empfangen könnten.
 """
-from flask import Flask, request
+from flask import Flask
 
 app = Flask(__name__)
 
@@ -19,9 +19,8 @@ app = Flask(__name__)
 @app.after_request
 def add_cors_headers(response):
     # Unsicher: Es wird auf alle Anfragen '*' gesetzt, was bedeutet, dass jeder Ursprung (Origin) akzeptiert wird.
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'PUT, GET, POST, DELETE, OPTIONS'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+    response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5004'
+
     return response
 
 
